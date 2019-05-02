@@ -7,181 +7,165 @@
 @section("content")
 <!-- SLIDER-->
 <div id="carousel" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner" >
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="/img/slider1.jpg" alt="imatge del parc">
-      <div class="carousel-caption">
-          <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
-      </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/img/slider1.jpg" alt="imatge del parc">
+            <div class="carousel-caption">
+                <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/img/slider2.jpg" alt="imatge del parc">
+            <div class="carousel-caption">
+                <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/img/slider3.jpg" alt="imatge del parc">
+            <div class="carousel-caption">
+                <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
+            </div>
+        </div>
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/img/slider2.jpg" alt="imatge del parc">
-      <div class="carousel-caption">
-          <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="/img/slider3.jpg" alt="imatge del parc">
-      <div class="carousel-caption">
-          <h2 class="text-center message"> Bevingut al parc dels teus somnis!</h2>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Prèvia</span>
-  </a>
-  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Següent</span>
-  </a>
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Prèvia</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Següent</span>
+    </a>
 </div>
 <!-- FI SLIDER -->
 
 <!-- PROMOCIONS -->
 <div class="container mt-3">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1 class="font-weight-bold text-center">PROMOCIONS NADAL 2019</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="font-weight-bold text-center">Promocions Nadal 2019</h1>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <a href="{{route('promocions')}}"><img src="/img/promocions/promocio1.jpg" class="img-fluid" alt="imatge promoció 1"></a>
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="{{route('promocions')}}"><img src="{{ asset('/img/promocions/promocio1.jpg') }}" class="img-fluid"
+                    alt="imatge promoció 1"></a>
+        </div>
     </div>
-  </div>
 </div>
 <!-- FI PROMOCIONS -->
 
 <!-- NOTICIES -->
 <div class="container mt-3">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1 class="font-weight-bold text-center text-uppercase">noticies</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="font-weight-bold text-center">Notícies</h1>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    @forelse($noticies as $noticia)
-    <div class="col-sm-6">
-      <div class="card flex-md-row mb-4 box-shadow h-md-250">
-        <img class="card-img-top" alt="imatge de la noticia" style="width: 200px;height: 300px; object-fit: cover;" src="{{$noticia->path_img}}">
+    <div class="row">
+        @forelse($noticies as $noticia)
+        <div class="col-sm-6">
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <img class="card-img-top" alt="imatge de la noticia"
+                    style="width: 200px;height: 300px; object-fit: cover;" src="{{$noticia->path_img}}">
 
-        <div class="card-body d-flex flex-column align-items-start">
-          <a href="/noticies?catId={{$noticia->catId}}" class="d-inline-block mb-2 text-success" style="background: none;border: none;"> {{$noticia->categoria}}</a>
-          <h3 class="mb-0">
-            <a class="text-dark">{{$noticia->titol}}</a>
-          </h3>
-            <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=100, $end = "..."))!!}</p>
-            <form action="{{ route('noticia',$noticia->id)}}" method="get">
-              <input type="hidden" name="id" value="{{$noticia->id}}">
-              <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
-            </form>
-          </div>
+                <div class="card-body d-flex flex-column align-items-start">
+                    <a href="/noticies?catId={{$noticia->catId}}" class="d-inline-block mb-2 text-success"
+                        style="background: none;border: none;"> {{$noticia->categoria}}</a>
+                    <h3 class="mb-0">
+                        <a class="text-dark">{{$noticia->titol}}</a>
+                    </h3>
+                    <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=100, $end
+                        = "..."))!!}</p>
+                    <form action="{{ route('noticia',$noticia->id)}}" method="get">
+                        <input type="hidden" name="id" value="{{$noticia->id}}">
+                        <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @empty
+        <p style="background-color: #e05e5e;text-align: center;font-weight: bold;"> No hi han noticies a llistar</p>
+        @endforelse
     </div>
-  </div>
-  @empty
-  <p style="background-color: #e05e5e;text-align: center;font-weight: bold;"> No hi han noticies a llistar</p>
-  @endforelse
-</div>
-<!-- FI NOTICIES -->
+    <!-- FI NOTICIES -->
 
-<!-- LOCALITZA -->
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1 class="font-weight-bold text-center">ON ESTEM?</h1>
+    <!-- LOCALITZA -->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="font-weight-bold text-center">On estem?</h1>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row">
-    <!-- Div amb el mapa -->
-    <div class="col-12" style="float: none; margin: 0 auto;">
-      <div id="myMap" style="position:relative;float:none;width:800px;height:400px;"></div>
+    <div class="row">
+        <div class="col-sm-12">
+
+            <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc4rbBZW_EiNrWWjzcgb2NnFAeBD66cSs&callback=myMap"></script>
+            <script>
+                $(document).ready(function () {
+                    var marker;
+                    var geocoder = new google.maps.Geocoder();
+                    var myLatlng = new google.maps.LatLng(40.7160476, 0.5648026);
+                    var mapOptions = { zoom: 7, center: myLatlng, mapTypeId: google.maps.MapTypeId.ROADMAP }
+                    var map = new google.maps.Map($("#map").get(0), mapOptions);
+
+                    var address = "Amposta";
+                    if (marker) { marker.setMap(null); }
+                    geocoder.geocode({ address: address }, function (results) {
+                        marker = new google.maps.Marker({
+                            position: results[0].geometry.location, map: map
+                        });
+
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: "<h3>" + "Univeylandia" + "<br><a href=http://maps.google.com/maps?daddr=" +
+                                address + ">Com anar</a>"
+                        }
+                        );
+                        infoWindow.open(map, marker);
+                    });
+                });
+            </script>
+            <div id="map" style="width:100%;height:400px;"></div>
+        </div>
     </div>
-    </br><h3>Indicacions per arribar</h3></br>
-    <div style="overflow-y:scroll; height:240px; margin-top:10%; float:none;position:relative;" id='directionsItinerary'></div>
-  </div>
 </div>
+
 <!-- FI LOCALITZA -->
 </div>
 
-<!-- Script del mapa -->
-<script type='text/javascript'>
-        var map;
-        var directionsManager;
-
-        navigator.geolocation.getCurrentPosition(locationHandler);
-
-
-          function GetMap()
-          {
-              map = new Microsoft.Maps.Map('#myMap', {});
-
-              //Request the user's location. PARA QUE FUNCIONE BIEN EL POSITION.ALGO, HAY QUE CERRAR LA FUNCION JUSTO AL FINAL, ANTES DE GETMAP()
-              navigator.geolocation.getCurrentPosition(function (position) {
-
-                //Load the directions module.
-                Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-                    //Create an instance of the directions manager.
-                    directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-
-                    //Create waypoints to route between.
-                    var actualWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: 'Ubicació actual', location: new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude) });
-                    directionsManager.addWaypoint(actualWaypoint);
-
-                    var univeylandiaWaypoint = new Microsoft.Maps.Directions.Waypoint({ address: 'Univeylandia', location: new Microsoft.Maps.Location(40.709141,0.582608) });
-                    directionsManager.addWaypoint(univeylandiaWaypoint);
-
-                    //Specify the element in which the itinerary will be rendered.
-                    directionsManager.setRenderOptions({ itineraryContainer: '#directionsItinerary' });
-
-                    //Calculate directions.
-                    directionsManager.calculateDirections();
-                });
-            });
-          }
-    </script>
-    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AjdLFBRKgbKR0sxu-uDDL_7EEKlat1mtnz71o2ZFD79hUITk14qaGZRYlKRpW8Mz' async defer></script>
-
-<!-- Fi del script del mapa -->
- <style type="text/css">
-
-.fotoFlickr.mr-2 {
-    height: 60px;
-    width: 100px;
-
-}
-</style>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="font-weight-bold text-center">Fotos realitzades pels nostres clients</h1>
+        </div>
+    </div>
+    <div class="row" id="photos">
+    </div>
+</div>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-            var url = "http://api.flickr.com/services/feeds/photos_public.gne?" +
-                      "format=json&jsoncallback=?&tags=parc atraccions";
+    $(document).ready(function () {
+        var url = "https://api.flickr.com/services/feeds/photos_public.gne?" +
+            "format=json&jsoncallback=?&tags=parc+atraccions";
 
-            $.getJSON(url, function(data){
-                var html = "";
-                $.each(data.items, function(i, item){
-
-
-                    html += "<a href="+item.link+"><img src=" + item.media.m + " class='fotoFlickr mr-2 mt-2'></a>";
-
+        $.getJSON(url, function (data) {
+            var html = "";
+            $.each(data.items, function (i, item) {
+                if (i <= 11) {
+                    html += "<div class='col-lg-2 col-md-4 col-6'>"
+                    html += "<a class='d-block mb-4' href=" + item.link + ">";
+                    html += "<img style='width:150px; height: 150px;' class='img-fluid img-thumbnail' src=" + item.media.m + ">";
+                    html += "</a>";
+                    html += "</div>";
                     html = html.replace("/>", ">");
-                });
-                $("#photos").html(html);
+                }
             });
+            $("#photos").html(html);
         });
-    </script>
-<main>
-
-
-	<div class="row">
-		<div class="col-4" style="float: none; margin: 0 auto;">
-			    <div id="photos"></div>
-		</div>
-
-
-</main>
-    </div>
-    </div>
+    });
+</script>
 
 <!--El chat-->
 
