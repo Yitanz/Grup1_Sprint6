@@ -57,7 +57,7 @@ class HomeController extends Controller
       $noticies = DB::table('noticies')
         ->join('users', 'users.id', '=', 'noticies.id_usuari')
         ->join('categories', 'categories.id', '=', 'noticies.categoria')
-        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
+        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'str_slug', 'categories.nom as categoria', 'categories.id as catId')
         ->orderBy('id', 'DESC')
         ->paginate(2);
 
@@ -434,7 +434,7 @@ class HomeController extends Controller
           }
         }
 
-        $noticia = noticies::find($request->get('id'));
+        $noticia = noticies::where('str_slug',$request->get('url-slug'))->first();
         $categoria = categories::find($noticia->categoria);
         return view("/noticia", compact('noticia', 'categoria', 'valid'));
     }
@@ -444,7 +444,7 @@ class HomeController extends Controller
       $noticies = DB::table('noticies')
         ->join('users', 'users.id', '=', 'noticies.id_usuari')
         ->join('categories', 'categories.id', '=', 'noticies.categoria')
-        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria', 'categories.id as catId')
+        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'str_slug', 'categories.nom as categoria', 'categories.id as catId')
         ->orderBy('id', 'DESC')
 
         ->where(function ($noticies) use ($request) {

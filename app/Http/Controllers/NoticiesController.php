@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str as Str;
 //use Illuminate\Support\Facades\Storage;
 use Storage;
 use File;
@@ -28,7 +29,7 @@ class NoticiesController extends Controller
       $noticies = DB::table('noticies')
         ->join('users', 'users.id', '=', 'noticies.id_usuari')
         ->join('categories', 'categories.id', '=', 'noticies.categoria')
-        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'categories.nom as categoria')
+        ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'str_slug', 'categories.nom as categoria')
         ->orderBy('id', 'DESC')
         ->paginate(10);
       return view('gestio.noticies.index', compact('noticies'));
@@ -71,7 +72,8 @@ class NoticiesController extends Controller
           'descripcio' => $request->get('descripcio'),
           'id_usuari' => Auth::id(),
           'categoria' => $request->get('categoria'),
-          'path_img' => $foto_up
+          'path_img' => $foto_up,
+          'str_slug' => str::slug($request->get('titol'))
       ]);
       $noticia ->save();
       return redirect('/gestio/noticies')->with('success', 'Noticia registrada correctament');

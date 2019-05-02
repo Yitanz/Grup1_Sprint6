@@ -17,6 +17,7 @@ class NoticiesSeeder extends Seeder
             'id_usuari' => 10,
             'categoria' => 1,
             'path_img' => '/storage/noticies/test.png',
+            'str_slug' => 'tancament-20-03-2019',
         ]);
 
         DB::table('noticies')->insert([
@@ -25,6 +26,7 @@ class NoticiesSeeder extends Seeder
             'id_usuari' => 10,
             'categoria' => 2,
             'path_img' => '/storage/noticies/test.png',
+            'str_slug' => 'nova-atraccio-dragon-khan',
         ]);
 
         DB::table('noticies')->insert([
@@ -33,6 +35,7 @@ class NoticiesSeeder extends Seeder
             'id_usuari' => 10,
             'categoria' => 1,
             'path_img' => '/storage/noticies/test.png',
+            'str_slug' => 'decoracio-de-nadal',
         ]);
     }
 }

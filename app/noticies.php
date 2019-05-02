@@ -12,6 +12,7 @@ class noticies extends Model
     'descripcio',
     'id_usuari',
     'categoria',
-    'path_img'
+    'path_img',
+    'str_slug'
   ];
 }
