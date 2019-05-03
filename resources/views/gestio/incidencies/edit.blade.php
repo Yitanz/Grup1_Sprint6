@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-6 mb-3">
             <label for="assigned-employee">Assignar a:</label>
-            <select id="employees" name="assigned-employee" class="chosen-select form-control form-control-sm form-control-chosen" data-placeholder="Buscar treballador...">
+            <select id="employees" name="assigned-employee" class="chosen-select form-control form-control-sm form-control-chosen" data-placeholder="Selecciona un treballador">
               <option> </option>
               @foreach ($rols as $rol)
               <optgroup label="{{ $rol->nom_rol }}">
