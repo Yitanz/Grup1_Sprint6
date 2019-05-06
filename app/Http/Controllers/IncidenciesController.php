@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Incidencia;
 use \App\PrioritatIncidencia;
 use \App\User;
+use \App\Rol;
 
 use App\Notifications\IncidenceAssigned;
 
