@@ -201,6 +201,7 @@ class IncidenciesController extends Controller
         $treballador_assignat = User::find($incidencia->id_usuari_assignat);
 
         $treballadors = User::where('id_rol', 5)
+        ->where('id_rol', '!=', 2)
         ->whereNotNull('email_verified_at')
         ->get();
 
