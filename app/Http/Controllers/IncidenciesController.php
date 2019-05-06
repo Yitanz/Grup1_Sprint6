@@ -192,13 +192,12 @@ class IncidenciesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $incidencia = Incidencia::findOrFail($id);
+     public function edit($id)
+     {
+         $incidencia = Incidencia::findOrFail($id);
 
-        $prioritats = PrioritatIncidencia::all();
-
-        $treballador_assignat = User::find($incidencia->id_usuari_assignat);
+         $prioritats = PrioritatIncidencia::all();
+         $rols = Rol::all();
 
         $treballadors = User::where('id_rol', 5)
         ->where('id_rol', '!=', 2)
@@ -207,6 +206,9 @@ class IncidenciesController extends Controller
 
         return view('gestio/incidencies/edit', compact(['incidencia', 'prioritats', 'treballadors', 'treballador_assignat']));
     }
+
+         return view('gestio/incidencies/edit', compact(['incidencia', 'prioritats', 'treballadors', 'treballador_assignat', 'rols']));
+     }
 
     /**
      * Update the specified resource in storage.
