@@ -200,7 +200,6 @@ class IncidenciesController extends Controller
          $rols = Rol::all();
 
         $treballadors = User::where('id_rol', 5)
-        ->where('id_rol', '!=', 2)
         ->whereNotNull('email_verified_at')
         ->get();
 
