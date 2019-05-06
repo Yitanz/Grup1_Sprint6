@@ -34,6 +34,7 @@ class UsersTableSeeder extends Seeder
                 'telefon' => $faker->phoneNumber,
                 'id_rol' => 1,
                 'id_dades_empleat' => null,
+                'actiu' => 0,
                 'remember_token' => str_random(10)
             ]);
         }
@@ -55,6 +56,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 2,
             'id_dades_empleat' => 1,
+            'actiu' => 1,
             'remember_token' => null
         ]);
 
@@ -76,6 +78,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 5,
             'id_dades_empleat' => 2,
+            'actiu' => 1,
             'remember_token' => null
         ]);
 
@@ -97,6 +100,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 6,
             'id_dades_empleat' => 3,
+            'actiu' => 1,
             'remember_token' => null
         ]);
 
@@ -118,6 +122,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 7,
             'id_dades_empleat' => 4,
+            'actiu' => 1,
             'remember_token' => null
         ]);
         DB::table('users')->insert([
@@ -138,6 +143,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 8,
             'id_dades_empleat' => 4,
+            'actiu' => 1,
             'remember_token' => null
         ]);
         DB::table('users')->insert([
@@ -158,6 +164,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 7,
             'id_dades_empleat' => 4,
+            'actiu' => 1,
             'remember_token' => null
         ]);
         DB::table('users')->insert([
@@ -178,6 +185,7 @@ class UsersTableSeeder extends Seeder
             'telefon' => '657337571',
             'id_rol' => 8,
             'id_dades_empleat' => 4,
+            'actiu' => 1,
             'remember_token' => null
         ]);
     }
