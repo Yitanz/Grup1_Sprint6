@@ -216,31 +216,34 @@ class IncidenciesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'title'=>'required',
-            'description'=> 'required',
-            'priority' => 'required',
-            'assigned-employee' => 'required'
-        ]);
+     public function update(Request $request, $id)
+     {
+         $request->validate([
+             'title'=>'required',
+             'description'=> 'required',
+             'priority' => 'required',
+             'assigned-employee' => 'required'
+         ]);
+         $user_diferent = false;
+         $incidencia = Incidencia::findOrFail($id);
 
-        $incidencia = Incidencia::findOrFail($id);
+         $user = User::find($request->get('assigned-employee'));
+         if($user->id != $incidencia->id_usuari_assignat){
+           $user_diferent = true;
+         }
+         $incidencia->titol = $request->get('title');
+         $incidencia->descripcio = $request->get('description');
+         $incidencia->id_prioritat = $request->get('priority');
+         $incidencia->id_estat = 2;
+         $incidencia->id_usuari_assignat = $request->get('assigned-employee');
+         $incidencia->save();
 
-        $user = User::find($request->get('assigned-employee'));
-
-        $incidencia->titol = $request->get('title');
-        $incidencia->descripcio = $request->get('description');
-        $incidencia->id_prioritat = $request->get('priority');
-        $incidencia->id_estat = 2;
-        $incidencia->id_usuari_assignat = $request->get('assigned-employee');
-        $incidencia->save();
-
-        //Enviar notificacio - guardar notificacio en la taula 'notifications'
-        $user->notify(new IncidenceAssigned($incidencia));
-
-        return redirect('gestio/incidencies/assign')->with('success', 'Incidència assignada correctament');
-    }
+         //Enviar notificacio - guardar notificacio en la taula 'notifications'
+         if($user_diferent){
+           $user->notify(new IncidenceAssigned($incidencia));
+         }
+         return redirect('gestio/incidencies/assign')->with('success', 'Incidència assignada correctament');
+     }
 
     /**
      * Remove the specified resource from storage.
