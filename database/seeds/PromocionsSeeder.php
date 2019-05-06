@@ -12,10 +12,10 @@ class PromocionsSeeder extends Seeder
     public function run()
     {
         DB::table('promocions')->insert([
-            'titol' => 'Lorem Ipsum ',
+            'titol' => 'Promoció Estiu Families',
             'descripcio' => '
                           <p>
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        Aprofita si vens en familia i fes mostra el DNI o algun carnet identificatiu al comprar els tickets per a beneficiarte d´un 15% de descompte en els tickets dels menors de 16 anys!</p>
 
                           ',
             'id_usuari' => 1,
@@ -23,14 +23,14 @@ class PromocionsSeeder extends Seeder
         ]);
 
         DB::table('promocions')->insert([
-            'titol' => 'Segona promoció',
+            'titol' => 'Promoció per a grups',
             'descripcio' => '
 
-                          <p>
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                          <p>Si vens en grup de 6 o més persones et regalem una entrada! Pagueu 5 i entreu 6! (Promoció vàlida només durant juny i juliol).
+                          </p>
                           ',
             'id_usuari' => 1,
-            'path_img' => '/storage/promocions/promociogeneral.jpg'
+            'path_img' => '/storage/promocions/promocio-2.png'
         ]);
 
 
