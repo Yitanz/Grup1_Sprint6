@@ -100,9 +100,14 @@ class ContacteController extends Controller
 
     $contacte->save();
 
-
+    $notificacio = ([
+      'titol' => "[".$contacte->tipus_pregunta."]"." Nou ticket: ".$contacte->nom,
+      'descripcio' => "El client '".$contacte->email."' ha enviat un nou ticket amb el missatge: \n".$contacte->missatge
+    ]);
+    $notificacio_enviar = collect($notificacio);
+    //dd($notificacio_enviar);
     $user = User::find($request->get('id_empleat'));
-    $user->notify(new TicketAssigned($contacte));
+    $user->notify(new TicketAssigned($notificacio_enviar));
 
 
     return redirect('/gestio/ticket')->with('success', 'Contacte enviat correctament');

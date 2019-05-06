@@ -17,9 +17,9 @@ class TicketAssigned extends Notification
      *
      * @return void
      */
-    public function __construct($contacte)
+    public function __construct($notificacio_enviar)
     {
-      $this->contacte = $contacte;
+      $this->contacte = $notificacio_enviar;
 
     }
 
@@ -56,12 +56,10 @@ class TicketAssigned extends Notification
      */
     public function toArray($notifiable)
     {
+        //dd($this->contacte);
         return [
-          'id' => $this->contacte->id,
-          'nom' => $this->contacte->nom,
-          'email' => $this->contacte->email,
-          'tipus_pregunta' => $this->contacte->tipus_pregunta,
-          'missatge' => $this->contacte->missatge,
+          'titol' => $this->contacte->first(),
+          'descripcio' => $this->contacte->slice(1)->first(),
         ];
     }
 }
