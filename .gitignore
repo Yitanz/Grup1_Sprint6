@@ -1,12 +1,22 @@
-owo
-<<<<<<< Updated upstream
+\.vs/
+### Laravel ###
+vendor/
+node_modules/
+npm-debug.log
 
-\.env
-=======
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
 
-\.env
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+storage/*.key
+.env.*.php
+.env.php
+.env
+Homestead.yaml
+Homestead.json
 
-public/storage/noticies/1556792851Captura\.PNG
-
-*.PNG
->>>>>>> Stashed changes
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
