@@ -1451,8 +1451,7 @@
         ]
     },
     {
-<<<<<<< Updated upstream
-=======
+
         "name": "laravel/telescope",
         "version": "v1.2",
         "version_normalized": "1.2.0.0",
