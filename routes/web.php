@@ -160,7 +160,7 @@ Route::get('/gestio/zones/eliminarAssign/{id}', 'AssignEmpZonaController@deleteA
 
  Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions')->middleware(['auth','is_admin','verified']);
 
- Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy')->middleware(['auth','is_admin','verified']);
+Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy')->middleware(['auth','is_admin','verified']);
 
 
  Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);

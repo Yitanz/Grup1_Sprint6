@@ -25,6 +25,7 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
+
         $incidencies = Incidencia::where('id_estat', 1)
         ->orderBy('id_prioritat', 'DESC')
         ->join('users AS u1','incidencies.id_usuari_reportador','u1.id')
@@ -116,6 +117,7 @@ class IncidenciesController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -133,6 +135,7 @@ class IncidenciesController extends Controller
         ]);
 
         $incidencia->save();
+
 
         return redirect('/gestio/incidencies')->with('success', 'Incidència creada correctament');
     }
@@ -302,8 +305,12 @@ class IncidenciesController extends Controller
 
         $temps = Carbon\Carbon::now();
         $temps = $temps->toDateString();
+        try{
+            $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
+        }catch(Exception $e){
+          return abort(404); 
+        }
 
-        $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
 
         return $pdf->download('incidencies_assignades_'.$temps.'.pdf');
     }

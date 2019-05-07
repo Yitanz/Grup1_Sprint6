@@ -1028,57 +1028,6 @@
         ]
     },
     {
-        "name": "harvesthq/chosen",
-        "version": "v1.8.7",
-        "version_normalized": "1.8.7.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/harvesthq/chosen-package.git",
-            "reference": "ad86732b668627c131e61ee8f0e6e9ed52e4db8d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/harvesthq/chosen-package/zipball/ad86732b668627c131e61ee8f0e6e9ed52e4db8d",
-            "reference": "ad86732b668627c131e61ee8f0e6e9ed52e4db8d",
-            "shasum": ""
-        },
-        "time": "2018-06-28T20:32:51+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Koen Punt",
-                "homepage": "https://github.com/koenpunt"
-            },
-            {
-                "name": "Patrick Filler",
-                "homepage": "https://github.com/pfiller"
-            },
-            {
-                "name": "Christophe Coevoet",
-                "homepage": "https://github.com/stof"
-            },
-            {
-                "name": "Ken Earley",
-                "homepage": "https://github.com/kenearley"
-            }
-        ],
-        "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
-        "homepage": "https://harvesthq.github.io/chosen/",
-        "keywords": [
-            "dropdown",
-            "form",
-            "input",
-            "multiselect",
-            "select",
-            "ui"
-        ]
-    },
-    {
         "name": "intervention/image",
         "version": "2.4.2",
         "version_normalized": "2.4.2.0",
@@ -2094,17 +2043,17 @@
     },
     {
         "name": "nexmo/client",
-        "version": "1.7.0",
-        "version_normalized": "1.7.0.0",
+        "version": "1.8.0",
+        "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Nexmo/nexmo-php.git",
-            "reference": "f8582d2361382e2b02352b1cb96c69ce2a2c7360"
+            "reference": "f74df3e6d3df5edf0474142a99644317e6fd21e9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Nexmo/nexmo-php/zipball/f8582d2361382e2b02352b1cb96c69ce2a2c7360",
-            "reference": "f8582d2361382e2b02352b1cb96c69ce2a2c7360",
+            "url": "https://api.github.com/repos/Nexmo/nexmo-php/zipball/f74df3e6d3df5edf0474142a99644317e6fd21e9",
+            "reference": "f74df3e6d3df5edf0474142a99644317e6fd21e9",
             "shasum": ""
         },
         "require": {
@@ -2120,7 +2069,7 @@
             "phpunit/phpunit": "^5.7",
             "squizlabs/php_codesniffer": "^3.1"
         },
-        "time": "2019-04-13T10:18:16+00:00",
+        "time": "2019-05-07T14:17:17+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2263,17 +2212,17 @@
     },
     {
         "name": "opis/closure",
-        "version": "3.1.6",
-        "version_normalized": "3.1.6.0",
+        "version": "3.2.0",
+        "version_normalized": "3.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/opis/closure.git",
-            "reference": "ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b"
+            "reference": "09b4389715a7eec100176ea58286649181753508"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/opis/closure/zipball/ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b",
-            "reference": "ccb8e3928c5c8181c76cdd0ed9366c5bcaafd91b",
+            "url": "https://api.github.com/repos/opis/closure/zipball/09b4389715a7eec100176ea58286649181753508",
+            "reference": "09b4389715a7eec100176ea58286649181753508",
             "shasum": ""
         },
         "require": {
@@ -2283,11 +2232,11 @@
             "jeremeamia/superclosure": "^2.0",
             "phpunit/phpunit": "^4.0|^5.0|^6.0|^7.0"
         },
-        "time": "2019-02-22T10:30:00+00:00",
+        "time": "2019-05-05T12:50:25+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.1.x-dev"
+                "dev-master": "3.2.x-dev"
             }
         },
         "installation-source": "dist",
@@ -3924,17 +3873,17 @@
     },
     {
         "name": "sebastian/environment",
-        "version": "4.2.1",
-        "version_normalized": "4.2.1.0",
+        "version": "4.2.2",
+        "version_normalized": "4.2.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/environment.git",
-            "reference": "3095910f0f0fb155ac4021fc51a4a7a39ac04e8a"
+            "reference": "f2a2c8e1c97c11ace607a7a667d73d47c19fe404"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/3095910f0f0fb155ac4021fc51a4a7a39ac04e8a",
-            "reference": "3095910f0f0fb155ac4021fc51a4a7a39ac04e8a",
+            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/f2a2c8e1c97c11ace607a7a667d73d47c19fe404",
+            "reference": "f2a2c8e1c97c11ace607a7a667d73d47c19fe404",
             "shasum": ""
         },
         "require": {
@@ -3946,7 +3895,7 @@
         "suggest": {
             "ext-posix": "*"
         },
-        "time": "2019-04-25T07:55:20+00:00",
+        "time": "2019-05-05T09:05:15+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

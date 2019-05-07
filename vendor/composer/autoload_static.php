@@ -15,6 +15,8 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'cf97c57bfe0f23854afd2f3818abb7a0' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/create_uploaded_file.php',
         '9bf37a3d0dad93e29cb4e1b1bfab04e9' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/marshal_headers_from_sapi.php',
@@ -59,6 +61,8 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
+            'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\' => 18,
             'Symfony\\Component\\VarDumper\\' => 28,
@@ -201,6 +205,14 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
+        ),
+        'Symfony\\Polyfill\\Iconv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
         ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
@@ -2700,6 +2712,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'Moontoast\\Math\\Exception\\ArithmeticException' => __DIR__ . '/..' . '/moontoast/math/src/Moontoast/Math/Exception/ArithmeticException.php',
         'Nexmo\\Account\\Balance' => __DIR__ . '/..' . '/nexmo/client/src/Account/Balance.php',
         'Nexmo\\Account\\Client' => __DIR__ . '/..' . '/nexmo/client/src/Account/Client.php',
+        'Nexmo\\Account\\Config' => __DIR__ . '/..' . '/nexmo/client/src/Account/Config.php',
         'Nexmo\\Account\\PrefixPrice' => __DIR__ . '/..' . '/nexmo/client/src/Account/PrefixPrice.php',
         'Nexmo\\Account\\Price' => __DIR__ . '/..' . '/nexmo/client/src/Account/Price.php',
         'Nexmo\\Account\\Secret' => __DIR__ . '/..' . '/nexmo/client/src/Account/Secret.php',
@@ -2711,6 +2724,9 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'Nexmo\\Application\\ApplicationInterface' => __DIR__ . '/..' . '/nexmo/client/src/Application/ApplicationInterface.php',
         'Nexmo\\Application\\Client' => __DIR__ . '/..' . '/nexmo/client/src/Application/Client.php',
         'Nexmo\\Application\\Filter' => __DIR__ . '/..' . '/nexmo/client/src/Application/Filter.php',
+        'Nexmo\\Application\\MessagesConfig' => __DIR__ . '/..' . '/nexmo/client/src/Application/MessagesConfig.php',
+        'Nexmo\\Application\\RtcConfig' => __DIR__ . '/..' . '/nexmo/client/src/Application/RtcConfig.php',
+        'Nexmo\\Application\\VbcConfig' => __DIR__ . '/..' . '/nexmo/client/src/Application/VbcConfig.php',
         'Nexmo\\Application\\VoiceConfig' => __DIR__ . '/..' . '/nexmo/client/src/Application/VoiceConfig.php',
         'Nexmo\\Application\\Webhook' => __DIR__ . '/..' . '/nexmo/client/src/Application/Webhook.php',
         'Nexmo\\Call\\Call' => __DIR__ . '/..' . '/nexmo/client/src/Call/Call.php',
@@ -2771,6 +2787,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'Nexmo\\Entity\\JsonSerializableInterface' => __DIR__ . '/..' . '/nexmo/client/src/Entity/JsonSerializableInterface.php',
         'Nexmo\\Entity\\JsonSerializableTrait' => __DIR__ . '/..' . '/nexmo/client/src/Entity/JsonSerializableTrait.php',
         'Nexmo\\Entity\\JsonUnserializableInterface' => __DIR__ . '/..' . '/nexmo/client/src/Entity/JsonUnserializableInterface.php',
+        'Nexmo\\Entity\\ModernCollectionTrait' => __DIR__ . '/..' . '/nexmo/client/src/Entity/ModernCollectionTrait.php',
         'Nexmo\\Entity\\NoRequestResponseTrait' => __DIR__ . '/..' . '/nexmo/client/src/Entity/NoRequestResponseTrait.php',
         'Nexmo\\Entity\\Psr7Trait' => __DIR__ . '/..' . '/nexmo/client/src/Entity/Psr7Trait.php',
         'Nexmo\\Entity\\RequestArrayTrait' => __DIR__ . '/..' . '/nexmo/client/src/Entity/RequestArrayTrait.php',
@@ -3339,6 +3356,7 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'PhpParser\\Node\\Expr\\AssignOp\\BitwiseAnd' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseAnd.php',
         'PhpParser\\Node\\Expr\\AssignOp\\BitwiseOr' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseOr.php',
         'PhpParser\\Node\\Expr\\AssignOp\\BitwiseXor' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/BitwiseXor.php',
+        'PhpParser\\Node\\Expr\\AssignOp\\Coalesce' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Coalesce.php',
         'PhpParser\\Node\\Expr\\AssignOp\\Concat' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Concat.php',
         'PhpParser\\Node\\Expr\\AssignOp\\Div' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Div.php',
         'PhpParser\\Node\\Expr\\AssignOp\\Minus' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Node/Expr/AssignOp/Minus.php',
@@ -4574,10 +4592,13 @@ class ComposerStaticIniteebf4e4e1a793206d9c4848d704bcf77
         'Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorTrait.php',
         'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
+        'Symfony\\Polyfill\\Iconv\\Iconv' => __DIR__ . '/..' . '/symfony/polyfill-iconv/Iconv.php',
+        'Symfony\\Polyfill\\Intl\\Idn\\Idn' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/Idn.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\ZonesTest' => __DIR__ . '/../..' . '/tests/Feature/ZonesTest.php',
+        'Tests\\Feature\\incidencies' => __DIR__ . '/../..' . '/tests/Feature/incidencies.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',

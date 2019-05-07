@@ -54,7 +54,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $noticies = DB::table('noticies')
+          $noticies = DB::table('noticies')
         ->join('users', 'users.id', '=', 'noticies.id_usuari')
         ->join('categories', 'categories.id', '=', 'noticies.categoria')
         ->select('noticies.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'str_slug', 'categories.nom as categoria', 'categories.id as catId')
@@ -71,6 +71,8 @@ class HomeController extends Controller
 
 
           return view('index', compact('noticies','promocions','chat'));
+
+
     }
 
     public function atraccions(){
@@ -407,9 +409,14 @@ class HomeController extends Controller
 
     public function llistarAtraccionsPublic($id)
     {
-      $atraccions = Atraccion::find($id);
-      $tipus_atraccio = TipusAtraccions::find($atraccions->tipus_atraccio);
-      return view('/atraccions_generades', compact('atraccions', 'tipus_atraccio'));
+
+        $atraccions = Atraccion::find($id);
+
+        $tipus_atraccio = TipusAtraccions::find($atraccions->tipus_atraccio);
+
+        return view('/atraccions_generades', compact('atraccions', 'tipus_atraccio'));
+
+
     }
 
     public function tendes_inter(){
