@@ -1517,7 +1517,7 @@
         ]
     },
     {
->>>>>>> Stashed changes
+
         "name": "laravel/tinker",
         "version": "v1.0.8",
         "version_normalized": "1.0.8.0",
