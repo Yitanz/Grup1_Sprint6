@@ -5009,11 +5009,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-<<<<<<< Updated upstream
+
         "time": "2018-09-21 13:07:52",
-=======
+
         "time": "2019-02-06T07:57:58+00:00",
->>>>>>> Stashed changes
+
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -5071,11 +5071,11 @@
         "require": {
             "php": ">=5.3.3"
         },
-<<<<<<< Updated upstream
+
         "time": "2018-09-21 13:07:52",
-=======
+
         "time": "2019-02-06T07:57:58+00:00",
->>>>>>> Stashed changes
+
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -5354,11 +5354,11 @@
             "ext-intl": "To show region name in time zone dump",
             "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
         },
-<<<<<<< Updated upstream
+
         "time": "2019-01-30 11:44:30",
-=======
+
         "time": "2019-04-17T14:57:01+00:00",
->>>>>>> Stashed changes
+
         "bin": [
             "Resources/bin/var-dump-server"
         ],
