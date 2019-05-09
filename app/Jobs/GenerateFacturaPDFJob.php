@@ -68,8 +68,11 @@ class GenerateFacturaPDFJob implements ShouldQueue
       $ruta_factura_pdf_update = $factures_dir.'univeylandia_compra_'.time().'.pdf';
 
       $ruta_factura_pdf_final = public_path().'/'.$ruta_factura_pdf_update;
-
-      $pdf = PDF::loadView('/factura_pdf', compact('venta_pdf', 'user_vista'))->save($ruta_factura_pdf_final);
+      try{
+        $pdf = PDF::loadView('/factura_pdf', compact('venta_pdf', 'user_vista'))->save($ruta_factura_pdf_final);
+      }catch(Exception $e){
+        return abort(404);
+      }
 
       DB::table('venta_productes')
           ->where('id', $this->id_venta)

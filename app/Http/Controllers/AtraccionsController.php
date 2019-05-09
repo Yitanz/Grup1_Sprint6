@@ -213,7 +213,11 @@ class AtraccionsController extends Controller
 
         $atraccions = Atraccion::all();
 
-        $pdf = PDF::loadView('/gestio/atraccions/pdfAtraccions', compact('atraccionetes'));
+        try{
+          $pdf = PDF::loadView('/gestio/atraccions/pdfAtraccions', compact('atraccionetes'));
+        }catch(Exception $e){
+          return abort(404);
+        }
 
         return $pdf->download('atraccions'.$temps.'.pdf');
     }

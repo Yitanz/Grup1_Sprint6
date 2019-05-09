@@ -65,7 +65,11 @@ class GenerateExportacioPDFVentesJob implements ShouldQueue
       $ids_ventes = $ventes->pluck('id')->toArray();
       $productes_venuts = Linia_ventes::whereIn('id_venta', $ids_ventes)->get()->count();
       $arxiu_exportacio = $temp_folder.'ventes_'.$start_date_exportacio.'_'.$end_date_exportacio.'.pdf';
+      try{
       $pdf = PDF::loadView('/gestio/ventes/exportPDF', compact('ventes', 'total', 'dates', 'numero_ventes', 'productes_venuts'))->save($arxiu_exportacio);
+      }catch(Exception $e){
+        return abort(404);
+      }
       $correu_user = $this->usuari->email;
       dispatch(new \App\Jobs\SendEmailVentesJob($arxiu_exportacio, $correu_user));
     }

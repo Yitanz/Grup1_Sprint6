@@ -311,7 +311,7 @@ class IncidenciesController extends Controller
         $temps = Carbon\Carbon::now();
         $temps = $temps->toDateString();
         try{
-            $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
+          $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
         }catch(Exception $e){
           return abort(404);
         }
