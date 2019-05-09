@@ -14,7 +14,7 @@
 
  Route::get('/contacte','HomeController@contacte')->name('contacte');
  Route::get('/noticies',"HomeController@noticies")->name('noticies');
- Route::post('/noticies/{str_slug}',"HomeController@noticia")->name('noticia');
+ Route::get('/noticies/{str_slug}',"HomeController@noticia")->name('noticia');
  Route::get('/atraccions',"HomeController@atraccions")->name('atraccions');
  Route::get('/atraccions/{id}',"HomeController@llistarAtraccionsPublic")->name('atraccions_generades');
  Route::get('/entrades',"HomeController@entrades")->name('entrades');
@@ -138,19 +138,12 @@ Route::get('/gestio/zones/eliminarAssign/{id}', 'AssignEmpZonaController@deleteA
 
 
  /* RUTES GRUP 2 */
- Route::any('/gestio/atraccions/crearassignaciomantenimentdate/{id}','AtraccionsController@crearAssignacioMantenimentDate')->name('atraccions.crearassignaciomantenimentdate')->middleware(['auth','is_admin','verified']);
+ Route::get('/gestio/atraccions/crearassignacio/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
 
- Route::any('/gestio/atraccions/crearassignacionetejadate/{id}','AtraccionsController@crearAssignacioNetejaDate')->name('atraccions.crearassignacionetejadate')->middleware(['auth','is_admin','verified']);
-
- Route::any('/gestio/atraccions/crearassignaciogeneraldate/{id}','AtraccionsController@crearAssignacioGeneralDate')->name('atraccions.crearassignaciogeneraldate')->middleware(['auth','is_admin','verified']);
-
- Route::any('/gestio/atraccions/crearassignaciomanteniment/{id}', 'AtraccionsController@crearAssignacioManteniment')->name('atraccions.crearassignaciomanteniment')->middleware(['auth','is_admin','verified']);
-
- Route::any('/gestio/atraccions/crearassignacioneteja/{id}', 'AtraccionsController@crearAssignacioNeteja')->name('atraccions.crearassignacioneteja')->middleware(['auth','is_admin','verified']);
-
- Route::any('/gestio/atraccions/crearassignaciogeneral/{id}', 'AtraccionsController@crearAssignacioGeneral')->name('atraccions.crearassignaciogeneral')->middleware(['auth','is_admin','verified']);
+ Route::post('/gestio/atraccions/crearassignaciomanteniment/{id}/empleats', 'AtraccionsController@assignaEmpleat')->name('atraccions.assignaempleat');
 
  Route::any('/gestio/atraccions/crearassignaciomanteniment/guardar/{id}', 'AtraccionsController@guardarAssignacio')->name('atraccions.guardarAssignacio')->middleware(['auth','is_admin','verified']);
+
 
  Route::any('/gestio/atraccions/assigna', 'AtraccionsController@assigna')->name('atraccions.assigna')->middleware(['auth','is_admin','verified']);
 
@@ -160,8 +153,7 @@ Route::get('/gestio/zones/eliminarAssign/{id}', 'AssignEmpZonaController@deleteA
 
  Route::any('/gestio/atraccions/assignacions/updateAssignacions/{id}', 'AtraccionsController@updateAssignacions')->name('atraccions.assignacions.updateAssignacions')->middleware(['auth','is_admin','verified']);
 
-Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy')->middleware(['auth','is_admin','verified']);
-
+ Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController@destroyAssignacions')->name('atraccions.assignacions.destroy')->middleware(['auth','is_admin','verified']);
 
  Route::resource('/gestio/atraccions', 'AtraccionsController')->middleware(['auth','is_admin','verified']);
 
@@ -172,7 +164,9 @@ Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController
  Route::resource('/gestio/clients', 'ClientsController')->middleware(['auth','is_admin','verified']);
 
  /* Guardar PDF */
- Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF');
+ Route::get('/view/atraccions/index', 'AtraccionsController@guardarPDF')->middleware(['auth','is_admin','verified']);
+
+ Route::get('/view/atraccions/assigna', 'AtraccionsController@guardarAssignacionsPDF')->middleware(['auth','is_admin','verified']);
 
  /* Gestio imatges */
  Route::get("/gestio/imatges", "ImageController@create")->name('imatges.create')->middleware(['auth','is_admin','verified']);

@@ -57,7 +57,7 @@
 
 
             <td><a href="{{ route('atraccions.edit',$atraccio->id)}}" class="btn btn-primary">Modificar</a>
-
+            
                 <form action="{{ route('atraccions.destroy', $atraccio->id)}}" method="post">
                   @csrf
                   @method('DELETE')

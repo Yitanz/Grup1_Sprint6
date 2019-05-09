@@ -6,14 +6,6 @@
 @endsection
 @section("content")
 
-
-  @if(session()->get('success'))
-  <div class="uper">
-    <div class="alert alert-success">
-      {{ session()->get('success') }}
-    </div>
-  </div>
-  @endif
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Assignar Empleats a Atraccio </h1>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -60,9 +52,7 @@
 
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="{{ route('atraccions.crearassignaciomantenimentdate', $atraccio->id)}}" class="btn btn-primary btn-sm">Manteniment</a>
-            <a href="{{ route('atraccions.crearassignacionetejadate',$atraccio->id)}}" class="btn btn-primary btn-sm">Neteja</a>
-            <a href="{{ route('atraccions.crearassignaciogeneraldate',$atraccio->id)}}" class="btn btn-primary btn-sm">Treballador</a>
+              <a href="{{ route('atraccions.crearassignaciomanteniment', $atraccio->id)}}" class="btn btn-primary btn-sm">Assignar empleat</a>
 </div>
           </td>
 

@@ -101,8 +101,9 @@ class ContacteController extends Controller
     $contacte->save();
 
     $notificacio = ([
+      'id' => $contacte->id,
       'titol' => "[".$contacte->tipus_pregunta."]"." Nou ticket: ".$contacte->nom,
-      'descripcio' => "El client '".$contacte->email."' ha enviat un nou ticket amb el missatge: \n".$contacte->missatge
+      'descripcio' => "El client '".$contacte->email."' ha enviat un nou ticket amb el missatge: <br/>".$contacte->missatge
     ]);
     $notificacio_enviar = collect($notificacio);
     //dd($notificacio_enviar);

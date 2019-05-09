@@ -76,6 +76,8 @@ class NoticiesController extends Controller
           'str_slug' => str::slug($request->get('titol'))
       ]);
       $noticia ->save();
+      $url = asset('/noticies/'.$noticia->str_slug);
+      dispatch(new \App\Jobs\SendEmailNoticiesJob($noticia, $url));
       return redirect('/gestio/noticies')->with('success', 'Noticia registrada correctament');
 
     }
