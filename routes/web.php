@@ -190,4 +190,4 @@ Route::get('/gestio/zones/eliminarAssign/{id}', 'AssignEmpZonaController@deleteA
 
 /*login per github*/
 Route::get('login/{provider}', 'Auth\SocialAuthController@redirectToProvider');
-Route::get('login/{provider}/callback', 'Auth\SocialAuthController@handlerProviderCallback');
+Route::get('login/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
