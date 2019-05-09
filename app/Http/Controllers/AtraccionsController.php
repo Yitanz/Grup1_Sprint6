@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Atraccion;
 use \App\TipusAtraccions;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -13,6 +13,8 @@ use Image;
 use PDF;
 use Carbon;
 use \App\AssignacioAtraccion;
+use App\Notifications\AssignarEmpleatAtraccio;
+use Notification;
 
 
 use \App\Horari;
@@ -24,10 +26,8 @@ use \App\User;
 class AtraccionsController extends Controller
 {
     private $data_inici_global;
-
     private $data_fi_global;
-
-
+    private $rol_treballador;
 
     /**
      * Display a listing of the resource.
@@ -36,28 +36,25 @@ class AtraccionsController extends Controller
      */
     public function index()
     {
-      $atraccionetes = DB::table('tipus_atraccions')
-            ->join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
-            ->get([
-              'tipus_atraccions.tipus as nom',
-              'tipus_atraccions.id as id_tipus',
-              'atraccions.nom_atraccio',
-              'atraccions.tipus_atraccio',
-              'atraccions.data_inauguracio',
-              'atraccions.altura_min',
-              'atraccions.altura_max',
-              'atraccions.accessibilitat',
-              'atraccions.acces_express',
-              'atraccions.id',
-              'atraccions.path',
-              'atraccions.descripcio'
-
-            ]);
+        $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
+        ->get([
+            'tipus_atraccions.tipus as nom',
+            'tipus_atraccions.id as id_tipus',
+            'atraccions.nom_atraccio',
+            'atraccions.tipus_atraccio',
+            'atraccions.data_inauguracio',
+            'atraccions.altura_min',
+            'atraccions.altura_max',
+            'atraccions.accessibilitat',
+            'atraccions.acces_express',
+            'atraccions.id',
+            'atraccions.path',
+            'atraccions.descripcio',
+        ]);
 
         $atraccions = Atraccion::all();
+
         return view('gestio/atraccions/index', compact('atraccionetes'));
-
-
     }
 
     /**
@@ -80,8 +77,7 @@ class AtraccionsController extends Controller
      */
     public function store(Request $request)
     {
-
-        request()->validate([
+        $request->validate([
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
             'alturamin' => 'required|integer',
             'alturamax' => 'required|integer'
@@ -90,8 +86,7 @@ class AtraccionsController extends Controller
         $file = $request->file('image');
         $file_name = time() . $file->getClientOriginalName();
         $file_path = 'storage/atraccions';
-        $img = Image::make($file->getRealPath())->resize(1280, 720)
-        ->save($file_path."/".$file_name);
+        $img = Image::make($file->getRealPath())->resize(1280, 720)->save($file_path."/".$file_name);
 
         $atraccio = new Atraccion([
             'nom_atraccio' => $request->get('nom'),
@@ -106,6 +101,7 @@ class AtraccionsController extends Controller
         ]);
 
         $atraccio->save();
+
         return redirect('/gestio/atraccions')->with('success', 'atraccio afegida');
     }
 
@@ -117,8 +113,9 @@ class AtraccionsController extends Controller
      */
     public function show($id)
     {
-      $atraccio  = Atraccion::findOrFail($id);
-      return view('gestio/atraccions/show');
+        $atraccio = Atraccion::findOrFail($id);
+
+        return view('gestio/atraccions/show');
     }
 
     /**
@@ -129,7 +126,8 @@ class AtraccionsController extends Controller
      */
     public function edit($id)
     {
-        $atraccio = Atraccion::find($id);
+        $atraccio = Atraccion::findOrFail($id);
+
         $tipus = TipusAtraccions::all();
 
         return view('gestio/atraccions/edit', compact('atraccio','tipus'));
@@ -144,7 +142,6 @@ class AtraccionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $atraccio = Atraccion::findOrFail($id);
 
         $atraccio->nom_atraccio = $request->get('nom');
@@ -155,7 +152,6 @@ class AtraccionsController extends Controller
         $atraccio->accessibilitat = $request->get('accessible');
         $atraccio->acces_express = $request->get('accesexpress');
         $atraccio->descripcio = $request->get('descripcio');
-
 
         if ($request->has('image')) {
             $image_path = public_path().$atraccio->path;
@@ -171,13 +167,10 @@ class AtraccionsController extends Controller
 
             $atraccio->path = "/".$file_path."/".$file_name;
         }
-            $atraccio->save();
 
-
-
+        $atraccio->save();
 
         return redirect('/gestio/atraccions')->with('success', 'atraccio modificada');
-
     }
 
     /**
@@ -188,17 +181,17 @@ class AtraccionsController extends Controller
      */
     public function destroy($id)
     {
-        $atraccio = Atraccion::find($id);
-        $atraccio->delete();
-        return redirect('/gestio/atraccions')->with('success', 'atraccio suprimida correctament');
+        $atraccio = Atraccion::findOrFail($id);
 
+        $atraccio->delete();
+
+        return redirect('/gestio/atraccions')->with('success', 'Atracció eliminada correctament');
     }
 
 
     public function guardarPDF()
     {
-        $atraccionetes = DB::table('tipus_atraccions')
-        ->join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
+        $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
         ->get([
           'tipus_atraccions.tipus as nom',
           'tipus_atraccions.id as id_tipus',
@@ -219,188 +212,230 @@ class AtraccionsController extends Controller
         $temps = $mytime->toDateString();
 
         $atraccions = Atraccion::all();
-        $pdf = PDF::loadView('/gestio/atraccions/pdf', compact('atraccionetes'));
-        return $pdf->download('atraccions'.$temps.'.pdf');
 
+        try{
+          $pdf = PDF::loadView('/gestio/atraccions/pdfAtraccions', compact('atraccionetes'));
+        }catch(Exception $e){
+          return abort(404);
+        }
+
+        return $pdf->download('atraccions'.$temps.'.pdf');
     }
 
 
     public function assigna()
     {
-
-        $atraccionetes = DB::table('tipus_atraccions')
-            ->join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
-            ->get([
-              'tipus_atraccions.tipus as nom',
-              'tipus_atraccions.id as id_tipus',
-              'atraccions.nom_atraccio',
-              'atraccions.tipus_atraccio',
-              'atraccions.data_inauguracio',
-              'atraccions.altura_min',
-              'atraccions.altura_max',
-              'atraccions.accessibilitat',
-              'atraccions.acces_express',
-              'atraccions.id',
-              'atraccions.path',
-              'atraccions.descripcio'
-
-            ]);
+        $atraccionetes = TipusAtraccions::join('atraccions', 'atraccions.tipus_atraccio', '=', 'tipus_atraccions.id')
+        ->get([
+            'tipus_atraccions.tipus as nom',
+            'tipus_atraccions.id as id_tipus',
+            'atraccions.nom_atraccio',
+            'atraccions.tipus_atraccio',
+            'atraccions.data_inauguracio',
+            'atraccions.altura_min',
+            'atraccions.altura_max',
+            'atraccions.accessibilitat',
+            'atraccions.acces_express',
+            'atraccions.id',
+            'atraccions.path',
+            'atraccions.descripcio'
+        ]);
 
         return view('/gestio/atraccions/assigna', compact('atraccionetes'));
     }
 
 
+    public function assignaEmpleat(Request $request)
+    {
+        $request->validate([
+            'data_inici' => ['required','date','before:data_fi'],
+            'data_fi' => ['required','date','after:data_inici'],
+            'id_rol' => ['required','integer']
+        ]);
+
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->data_inici,$request->data_inici,$request->id_rol);
+
+        return response()->json(array('empleats' => $empleats), 200);
+    }
+
     public function crearAssignacioManteniment(Request $request, $id)
     {
-
-      request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
-      ]);
-
-        $data_inici_global = $request->get('data_inici_assignacio_empleat');
-        $data_fi_global = $request->get('data_fi_assignacio_empleat');
-
         $atraccio = Atraccion::find($id);
+        $rols = Rol::where('id','!=',1)->where('id','!=',2)->orderBy('id','DESC')->get();
 
-        $user = AssignacioAtraccion::assignarMantenimentFiltro();
-
-
-        return view('/gestio/atraccions/crearassignaciomanteniment', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+        return view('/gestio/atraccions/crearassignaciomanteniment', compact('atraccio','rols'));
     }
 
-    public function crearAssignacioMantenimentDate(Request $request, $id)
-{
-        $atraccio = Atraccion::find($id);
-        return view('/gestio/atraccions/crearassignaciomantenimentdate', compact('atraccio'));
-    }
+    public function assignaEmpleatNeteja(Request $request)
+    {
+        $request->validate([
+            'data_inici' => ['required','date','before:data_fi'],
+            'data_fi' => ['required','date','after:data_inici']
+        ]);
 
-      public function crearAssignacioNetejaDate(Request $request, $id)
-  {
-          $atraccio = Atraccion::find($id);
-          return view('/gestio/atraccions/crearassignacionetejadate', compact('atraccio'));
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),4);
+
+        // dump($empleats);
+
+        return response()->json(array('empleats' => $empleats), 200);
     }
 
     public function crearAssignacioNeteja(Request $request, $id)
     {
-
-      request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
-      ]);
-$user = AssignacioAtraccion::assignarNetejaFiltro();
-
-      $data_inici_global = $request->get('data_inici_assignacio_empleat');
-      $data_fi_global = $request->get('data_fi_assignacio_empleat');
-
       $atraccio = Atraccion::find($id);
 
-
-             return view('/gestio/atraccions/crearassignacioneteja', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+      return view('/gestio/atraccions/crearassignacioneteja', compact('atraccio'));
     }
 
-    public function crearAssignacioGeneralDate(Request $request, $id)
-  {
-    $atraccio = Atraccion::find($id);
-    return view('/gestio/atraccions/crearassignaciogeneraldate', compact('atraccio'));
-    }
+    public function assignaEmpleatGeneral(Request $request)
+    {
+        $request->validate([
+            'data_inici' => ['required','date','before:data_fi'],
+            'data_fi' => ['required','date','after:data_inici']
+        ]);
 
+        $empleats = AssignacioAtraccion::AssignacioFiltre($request->get('data_inici'),$request->get('data_inici'),5);
+
+        return response()->json(array('empleats' => $empleats), 200);
+    }
 
     public function crearAssignacioGeneral(Request $request, $id)
     {
-
-      request()->validate([
-       'data_inici_assignacio_empleat'      => 'required|date|date_format:Y-m-d|before:end_at',
-       'data_fi_assignacio_empleat'        => 'required|date|date_format:Y-m-d|after:start_at',
-      ]);
-      $data_inici_global = $request->get('data_inici_assignacio_empleat');
-      $data_fi_global = $request->get('data_fi_assignacio_empleat');
       $atraccio = Atraccion::find($id);
 
-      $user = AssignacioAtraccion::assignarGeneralFiltro();
-
-
-             return view('/gestio/atraccions/crearassignaciogeneral', compact('user', 'atraccio', 'data_inici_global', 'data_fi_global'));
+      return view('/gestio/atraccions/crearassignaciogeneral', compact('atraccio'));
     }
-
 
     public function guardarAssignacio(Request $request, $id)
     {
+        $atraccio = Atraccion::findOrFail($id);
 
-        $atraccio = Atraccion::find($id);
         $assignacio = new AssignacioAtraccion([
             'id_empleat'=>$request->get('id_empleat'),
             'id_atraccio'=>$request->get('id_atraccio'),
             'data_inici'=> $request->get('data_inici_modal'),
             'data_fi'=>$request->get('data_fi_modal')
-
         ]);
+
         $assignacio->save();
 
-        return redirect('/gestio/atraccions/assigna')->with('success', 'OK bro :)');
+        $notificacio = ([
+          'id' => $assignacio->id,
+          'titol' => "Nova assignació a la atracció ". $atraccio->nom_atraccio,
+          'descripcio' => "Has sigut assignat a la atracció '".$atraccio->nom_atraccio."' del ".$assignacio->data_inici." al ".$assignacio->data_fi
+        ]);
+        $notificacio_enviar = collect($notificacio);
+
+        $user = User::find($assignacio->id_empleat);
+        $user->notify(new AssignarEmpleatAtraccio($notificacio_enviar));
+        return redirect('/gestio/atraccions/assigna')->with('success', 'Empleat assignat correctament');
     }
 
-        public function assignacions()
-        {
-            $assignacio = DB::table('assign_emp_atraccions')
-            ->leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
+    public function assignacions()
+    {
+        $assignacio = AssignacioAtraccion::leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
             ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')
             ->leftJoin('rols','rols.id', 'users.id')
-                  ->get([
-                    'assign_emp_atraccions.id as id',
-                    'assign_emp_atraccions.id_empleat as id_empleat',
-                    'assign_emp_atraccions.id_atraccio as id_atraccio',
-                    'assign_emp_atraccions.data_inici as data_inici',
-                    'assign_emp_atraccions.data_fi as data_fi',
-                    'users.nom as nom_empleat',
-                    'users.cognom1 as cognom_empleat',
-                    'atraccions.nom_atraccio as nom_atraccio',
-                    'rols.nom_rol as nom_rol'
-                ]);
+            ->get([
+                'assign_emp_atraccions.id as id',
+                'assign_emp_atraccions.id_empleat as id_empleat',
+                'assign_emp_atraccions.id_atraccio as id_atraccio',
+                'assign_emp_atraccions.data_inici as data_inici',
+                'assign_emp_atraccions.data_fi as data_fi',
+                'users.nom as nom_empleat',
+                'users.cognom1 as cognom_empleat',
+                'atraccions.nom_atraccio as nom_atraccio',
+                'rols.nom_rol as nom_rol'
+            ]);
 
-            return view('gestio/atraccions/assignacions', compact('assignacio'));
+        return view('gestio/atraccions/assignacions', compact('assignacio'));
+    }
 
+    public function editAssignacions(Request $request, $id)
+    {
+        $assignacio = AssignacioAtraccion::findOrFail($id);
+
+        $dades_user = User::findOrFail($assignacio->id_empleat);
+
+        $dades_atraccio = Atraccion::findOrFail($assignacio->id_atraccio);
+
+        return view('gestio/atraccions/editAssignacions', compact(['assignacio','dades_user','dades_atraccio']));
+    }
+
+    public function updateAssignacions(Request $request, $id)
+    {
+        $request->validate([
+            'data_inici' => ['required','date','before:data_fi'],
+            'data_fi' => ['required','date','after:data_inici']
+        ]);
+
+        $modificat = false;
+
+        $assignacio = AssignacioAtraccion::findOrFail($id);
+
+        $antiga_dataInici = $assignacio->data_inici;
+        $antiga_dataFi = $assignacio->data_fi;
+
+        if ($assignacio->data_inici != $request->get('data_inici') || $assignacio->data_fi != $request->get('data_fi')) {
+          $modificat = true;
         }
 
-        public function editAssignacions(Request $request, $id)
-        {
+        $assignacio->data_inici = $request->get('data_inici');
+        $assignacio->data_fi = $request->get('data_fi');
 
-            $assignacio = AssignacioAtraccion::find($id);
-            $dades_user = User::find($assignacio->id_empleat);
-            $dades_atraccio = Atraccion::find($assignacio->id_atraccio);
+        $assignacio->save();
 
+        if($modificat){
+          $atraccio = Atraccion::findOrFail($assignacio->id_atraccio);
+          $notificacio = ([
+            'id' => $assignacio->id,
+            'titol' => "Assignació a l'atracció ". $atraccio->nom_atraccio.' modificada',
+            'descripcio' => "S'han modificat les dates de l'assignació a l'atracció '".$atraccio->nom_atraccio."': <br/> - Antiga data inici:".$antiga_dataInici." || Antiga data fi: ".$antiga_dataFi."<br/> - Nova data inici: ".$assignacio->data_inici." || Nova data fi: ".$assignacio->data_fi
+          ]);
+          $notificacio_enviar = collect($notificacio);
 
-            return view('gestio/atraccions/editAssignacions', compact(['assignacio','dades_user','dades_atraccio']));
+          $user = User::find($assignacio->id_empleat);
+          $user->notify(new AssignarEmpleatAtraccio($notificacio_enviar));
         }
 
-        public function updateAssignacions(Request $request, $id)
-        {
+        return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio modificada correctament');
+    }
+
+    public function destroyAssignacions($id)
+    {
+        $assignacio = AssignacioAtraccion::find($id);
+
+        $assignacio->delete();
+
+        return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio suprimida correctament');
+    }
 
 
+    public function guardarAssignacionsPDF()
+    {
+        $assignacio = AssignacioAtraccion::leftJoin('users','users.id', 'assign_emp_atraccions.id_empleat')
+            ->leftJoin('atraccions','atraccions.id', 'assign_emp_atraccions.id_atraccio')
+            ->leftJoin('rols','rols.id', 'users.id')
+            ->get([
+                'assign_emp_atraccions.id as id',
+                'assign_emp_atraccions.id_empleat as id_empleat',
+                'assign_emp_atraccions.id_atraccio as id_atraccio',
+                'assign_emp_atraccions.data_inici as data_inici',
+                'assign_emp_atraccions.data_fi as data_fi',
+                'users.nom as nom_empleat',
+                'users.cognom1 as cognom_empleat',
+                'atraccions.nom_atraccio as nom_atraccio',
+                'rols.nom_rol as nom_rol'
+            ]);
 
-            $assignacio = AssignacioAtraccion::findOrFail($id);
+        $mytime = Carbon\Carbon::now();
+        $temps = $mytime->toDateString();
 
-            $assignacio->data_inici = $request->get('data_inici');
-            $assignacio->data_fi = $request->get('data_fi');
+        $atraccions = AssignacioAtraccion::all();
 
-            $assignacio->save();
+        $pdf = PDF::loadView('/gestio/atraccions/pdfAssignacions', compact('assignacio'));
 
-
-
-            return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio modificada correctament');
-
-        }
-
-        public function destroyAssignacions($id)
-        {
-            $assignacio = AssignacioAtraccion::find($id);
-
-            $assignacio->delete();
-
-            return redirect('/gestio/atraccions/assignacions')->with('success', 'Assignacio suprimida correctament');
-        }
-
-
-
+        return $pdf->download('assignacioAtraccions'.$temps.'.pdf');
+    }
 
 }

@@ -31,12 +31,7 @@
                     </h3>
                     <p class="card-text mb-auto">{!!html_entity_decode(str_limit($noticia->descripcio, $limit=100, $end
                         = "..."))!!}</p>
-                    <form action="{{ route('noticia',$noticia->str_slug)}}" method="POST">
-                      @csrf 
-                        <input type="hidden" name="url-slug" value="{{$noticia->str_slug}}">
-                        <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
-                    </form>
-
+                        <a href="{{ route('noticia',$noticia->str_slug)}}"  class="btn btn-outline-info"> Continuar llegint </a>
                 </div>
             </div>
         </div>

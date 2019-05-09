@@ -431,7 +431,7 @@ class HomeController extends Controller
 
     }
 
-    public function noticia(Request $request)
+    public function noticia($str_slug)
     {
         $valid = 0;
         if (Auth::check()) {
@@ -441,7 +441,7 @@ class HomeController extends Controller
           }
         }
 
-        $noticia = noticies::where('str_slug',$request->get('url-slug'))->first();
+        $noticia = noticies::where('str_slug',$str_slug)->first();
         $categoria = categories::find($noticia->categoria);
         return view("/noticia", compact('noticia', 'categoria', 'valid'));
     }

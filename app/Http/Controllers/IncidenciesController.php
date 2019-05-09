@@ -243,11 +243,16 @@ class IncidenciesController extends Controller
 
          //Enviar notificacio - guardar notificacio en la taula 'notifications'
          if($user_diferent){
-           $user->notify(new IncidenceAssigned($incidencia));
+           $notificacio = ([
+             'id' => $incidencia->id,
+             'titol' => "Nova incidencia: ". $incidencia->titol,
+             'descripcio' => $incidencia->descripcio
+           ]);
+           $notificacio_enviar = collect($notificacio);
+           $user->notify(new IncidenceAssigned($notificacio_enviar));
          }
          return redirect('gestio/incidencies/assign')->with('success', 'Incidència assignada correctament');
      }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -306,9 +311,9 @@ class IncidenciesController extends Controller
         $temps = Carbon\Carbon::now();
         $temps = $temps->toDateString();
         try{
-            $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
+          $pdf = PDF::loadView('/gestio/incidencies/assignades_pdf', compact('incidencies'));
         }catch(Exception $e){
-          return abort(404); 
+          return abort(404);
         }
 
 

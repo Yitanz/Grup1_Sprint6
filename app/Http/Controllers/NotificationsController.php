@@ -9,7 +9,7 @@ use \App\User;
 class NotificationsController extends Controller
 {
     /**
-     * 
+     *
      */
     public function destroy($user_id, Request $request)
     {
@@ -19,8 +19,13 @@ class NotificationsController extends Controller
                 $n->markAsRead();
             }
         });
-
-        return back();
+        if(!$request->has('crida_ajax')){
+          $id_notificacio = $request->get('notification_uuid');
+          //return view('notificacions', compact('id_notificacio'));
+          return redirect('/notificacions')->with('id_notificacio', $id_notificacio);
+        }else{
+          return "Okxd";
+        }
     }
 
 }
