@@ -7,11 +7,11 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class IncidenceAssigned extends Notification
+class AssignarEmpleatAtraccio extends Notification
 {
     use Queueable;
 
-    private $incidencia;
+    private $notificacio;
 
     /**
      * Create a new notification instance.
@@ -20,7 +20,7 @@ class IncidenceAssigned extends Notification
      */
     public function __construct($notificacio_enviar)
     {
-        $this->incidencia = $notificacio_enviar;
+        $this->notificacio = $notificacio_enviar;
     }
 
     /**
@@ -56,10 +56,10 @@ class IncidenceAssigned extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            'id' => $this->incidencia->first(),
-            'titol' => $this->incidencia->slice(1)->first(),
-            'descripcio' => $this->incidencia->slice(2)->first(),
-        ];
+      return [
+        'id' => $this->notificacio->first(),
+        'titol' => $this->notificacio->slice(1)->first(),
+        'descripcio' => $this->notificacio->slice(2)->first(),
+      ];
     }
 }

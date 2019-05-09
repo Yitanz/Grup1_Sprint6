@@ -58,8 +58,9 @@ class TicketAssigned extends Notification
     {
         //dd($this->contacte);
         return [
-          'titol' => $this->contacte->first(),
-          'descripcio' => $this->contacte->slice(1)->first(),
+          'id' => $this->contacte->first(),
+          'titol' => $this->contacte->slice(1)->first(),
+          'descripcio' => $this->contacte->slice(2)->first(),
         ];
     }
 }
