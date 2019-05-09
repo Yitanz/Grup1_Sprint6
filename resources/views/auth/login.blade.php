@@ -99,6 +99,11 @@
 
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <a href="{{ url('login/github') }}" class="btn btn-outline-secondary btn-block">Inicia sessio amb github</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
 

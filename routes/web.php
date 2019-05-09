@@ -193,3 +193,7 @@ Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController
  Route::get('/tenda/atraccions', 'TendaController@indexAtraccions')->name('tendaFotos');
  Route::get('/imprimirFotos/{id}','TendaController@imprimirFotos');
  Route::get('/comprarFotos/{id}','TendaController@afegir_Foto');
+
+/*login per github*/
+Route::get('login/{provider}', 'Auth\SocialAuthController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\SocialAuthController@handlerProviderCallback');

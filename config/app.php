@@ -169,7 +169,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Laravel\Socialite\SocialiteServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -238,6 +238,8 @@ return [
         ],
         /* QR CODES */
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        /*Socialite*/
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
