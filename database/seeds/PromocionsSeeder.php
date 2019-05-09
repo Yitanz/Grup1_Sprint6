@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
+use Illuminate\Support\Str as Str;
 
 class PromocionsSeeder extends Seeder
 {
@@ -11,6 +13,10 @@ class PromocionsSeeder extends Seeder
      */
     public function run()
     {
+      $faker = Faker::create();
+      $slug = Str::slug('Promoció Estiu Families');
+
+      
         DB::table('promocions')->insert([
             'titol' => 'Promoció Estiu Families',
             'descripcio' => '
@@ -19,8 +25,11 @@ class PromocionsSeeder extends Seeder
 
                           ',
             'id_usuari' => 1,
-            'path_img' => '/storage/promocions/promociogeneral.jpg'
+            'path_img' => '/storage/promocions/promociogeneral.jpg',
+            'slug' => $slug
         ]);
+
+      $slug = Str::slug('Promoció per a grups');
 
         DB::table('promocions')->insert([
             'titol' => 'Promoció per a grups',
@@ -30,7 +39,8 @@ class PromocionsSeeder extends Seeder
                           </p>
                           ',
             'id_usuari' => 1,
-            'path_img' => '/storage/promocions/promocio-2.png'
+            'path_img' => '/storage/promocions/promocio-2.png',
+            'slug' => $slug
         ]);
 
 

@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str as Str;
+
+
 use Storage;
 use File;
 use Auth;
@@ -66,7 +69,8 @@ class PromocionsController extends Controller
           'titol' => $request->get('titol'),
           'descripcio' => $request->get('descripcio'),
           'id_usuari' => Auth::id(),
-          'path_img' => $foto_up
+          'path_img' => $foto_up,
+          'slug' => Str::slug($request->get('titol')),
       ]);
       $promocio ->save();
       return redirect('/gestio/promocions')->with('success', 'Promoció registrada correctament');
@@ -111,6 +115,8 @@ class PromocionsController extends Controller
       $promocio = Promocions::find($id);
       $promocio->titol = $request->get('titol');
       $promocio->descripcio = $request->get('descripcio');
+      $promocio->slug = Str::slug($request->get('titol'));
+
       if ($request->has('image')) {
         $image_path = public_path().$promocio->path_img;
         if(File::exists($image_path)) {

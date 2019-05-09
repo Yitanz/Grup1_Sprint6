@@ -25,11 +25,13 @@
                         <a class="text-dark">{{$promocio->titol}}</a>
                     </h3>
                     <p class="card-text mb-auto">{!!html_entity_decode(str_limit($promocio->descripcio, $limit=200, $end
-                        = "..."))!!}</p>
-                    <form action="{{ route('promocio',$promocio->id)}}" method="get">
+                        = "..."))!!}
+                    </p>
+                    <a href="{{ route('promocio', $promocio->slug)}}" class="btn btn-outline-info">Continuar llegint</a>
+                    <!---<form action="{{ route('promocio',$promocio->id)}}" method="get">
                         <input type="hidden" name="id" value="{{$promocio->id}}">
                         <button type="submit" class="btn btn-outline-info">Continuar llegint</button>
-                    </form>
+                    </form>-->
                 </div>
             </div>
         </div>

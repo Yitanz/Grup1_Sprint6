@@ -11,6 +11,10 @@ class Promocions extends Model
     'titol',
     'descripcio',
     'id_usuari',
-    'path_img'
+    'path_img',
+    'slug'
   ];
+
+  
+
 }

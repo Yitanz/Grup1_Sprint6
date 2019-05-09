@@ -9,6 +9,10 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
 </head>
 
 <body>
@@ -100,8 +104,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <a href="{{ url('login/github') }}" class="btn btn-outline-secondary btn-block">Inicia sessio amb github</a>
+                                <div class="col-sm-12 text-center">
+                                    <a href="{{ url('login/github') }}" class="text-dark">
+                                        <i class="fab fa-github fa-4x"></i>
+                                    </a>
                                 </div>
                             </div>
                         </form>

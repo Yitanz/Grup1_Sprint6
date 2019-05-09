@@ -468,7 +468,7 @@ class HomeController extends Controller
       return view('noticies', compact('noticies'));
     }
 
-    public function promocio (Request $request)
+    public function promocio ($slug)
     {
         $valid = 0;
         if (Auth::check()) {
@@ -478,7 +478,8 @@ class HomeController extends Controller
           }
         }
 
-        $promocio = promocions::find($request->get('id'));
+        $promocio = promocions::where('slug','=', $slug)->firstOrFail();;
+
         return view("/promocio", compact('promocio', 'valid'));
     }
 
@@ -486,7 +487,7 @@ class HomeController extends Controller
     {
       $promocions = DB::table('promocions')
         ->join('users', 'users.id', '=', 'promocions.id_usuari')
-        ->select('promocions.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img')
+        ->select('promocions.id', 'titol', 'descripcio', 'users.nom', 'users.cognom1', 'users.cognom2', 'users.numero_document', 'path_img', 'slug')
         ->orderBy('id', 'DESC')
         ->paginate(8);
 

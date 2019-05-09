@@ -26,7 +26,7 @@
  Route::get('/faq',"HomeController@faq")->name('faq');
  Route::get('/multimedia',"HomeController@multimedia")->name('multimedia');
  Route::get('/promocions',"HomeController@promocions")->name('promocions');
- Route::get('/promocions/n',"HomeController@promocio")->name('promocio');
+ Route::get('/promocions/{promocio}',"HomeController@promocio")->name('promocio');
  Route::get('/tendes/figures', array('as' => 'tenda_figures','uses' => 'HomeController@tenda_figures'));
  Route::get('/construccio','HomeController@construccio')->name('construccio');
 
@@ -196,4 +196,4 @@ Route::any('/gestio/atraccions/assignacions/destroy/{id}', 'AtraccionsController
 
 /*login per github*/
 Route::get('login/{provider}', 'Auth\SocialAuthController@redirectToProvider');
-Route::get('login/{provider}/callback', 'Auth\SocialAuthController@handlerProviderCallback');
+Route::get('login/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
