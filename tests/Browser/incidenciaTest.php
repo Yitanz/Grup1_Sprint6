@@ -18,8 +18,9 @@ class incidenciaTest extends DuskTestCase
      * @return void
      */
 
-    public function usuari_envia_incidencia()
+    public function test_usuari_envia_incidencia()
     {
+
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->clickLink('Login')
@@ -44,7 +45,7 @@ class incidenciaTest extends DuskTestCase
      * @test
      * @return void
     */
-    public function usuari_envia_incidencia_falla()
+    public function test_usuari_envia_incidencia_falla()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
