@@ -20,9 +20,8 @@ use \App\categories;
 class NoticiesController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Llista les noticies
+     * @return [view]           [retorna la vista amb les noticies]
      */
     public function index(Request $request)
     {
@@ -36,31 +35,30 @@ class NoticiesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra el formulari de creació de una nova noticia.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-      
         $categories = categories::all();
         return view('gestio.noticies.create', compact('categories'));
     }
 
     /**
-     * Store a newly created resource in storage.-
+     * Guarda una nova noticia.
+     * Si es crea la noticia correctament, crida a una notificació que envía un corrou a tots els clients.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
       if ($request->has('image')) {
-
         request()->validate([
-              'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-              'titol' => 'required|unique:noticies,titol',
-          ]);
 
+              'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+          ]);
         $file = $request->file('image');
         $file_name = time() . $file->getClientOriginalName();
         $file_path = 'storage/noticies';
@@ -85,7 +83,7 @@ class NoticiesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostra la noticia indicada.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -98,7 +96,7 @@ class NoticiesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostra el formulari d'edició de la noticia indicada.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -113,7 +111,7 @@ class NoticiesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualitza la noticia especificada.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -147,7 +145,7 @@ class NoticiesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina la noticia indicada.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
