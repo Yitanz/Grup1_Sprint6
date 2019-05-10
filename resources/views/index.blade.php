@@ -167,56 +167,6 @@
     });
 </script>
 
-<!--El chat-->
-
-<div class="chatbox chatbox--tray chatbox--empty">
-    <div class="chatbox__title">
-        <h5><a href="#">Chat</a></h5>
-        <button class="chatbox__title__tray">
-            <span></span>
-        </button>
-        <button class="chatbox__title__close">
-            <span>
-                <svg viewBox="0 0 12 12" width="12px" height="12px">
-                    <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
-                    <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
-                </svg>
-            </span>
-        </button>
-    </div>
-    <div class="chatbox__body">
-        <div class="chatbox__body__message chatbox__body__message--left">
-
-         @forelse($chat as $chats)
-
-            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt="Picture">
-            <p>{{ $chats->msg }}</p>
-
-            @empty
-            <p>sense missatges</p>
-
-            @endforelse
-
-
-        </div>
-    </div>
-
-    <!--login al chat-->
-    <form class="chatbox__credentials">
-        <div class="form-group">
-            <label for="inputName">Nom:</label>
-            <input type="text" class="form-control" id="inputName" required>
-        </div>
-        <div class="form-group">
-            <label for="inputEmail">Correu:</label>
-            <input type="email" class="form-control" id="inputEmail" required>
-        </div>
-        <button type="submit" class="btn btn-success btn-block">Accedir </button>
-    </form>
-
-    <!--enviar-->
-    <input class="chatbox__message" placeholder="Write something interesting"></input>
-</div>
 @endsection
 
 @section("footer")

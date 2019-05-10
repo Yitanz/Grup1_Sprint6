@@ -41,6 +41,7 @@
                 </select>
             </div>
         <button id="submit" type="submit" class="btn btn-primary">Enviar</button>
+        <p id="sol"></p>
         </div>
     </form>
 
@@ -53,6 +54,11 @@
 $(document).ready(function(){
    jQuery('#submit').click(function(e){
      e.preventDefault();
+
+     if($("#title").val() == ""  || $("#description").val() == "")
+         $("#sol").html("Revisa els camps")
+      else
+
      $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -69,9 +75,7 @@ $(document).ready(function(){
 //        email: {{Auth::user()->email}}
 
       },
-      error: function(xhr, status, error) {
-  alert("Error: " + xhr.status + " - " + error);
-},
+
       success: function(result) {
         $("#submit").html("Enviat Correctament");
          $("#submit").attr("disabled", true);

@@ -40,7 +40,7 @@ class ZonesController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-          'nom' => 'required'
+          'nom' => 'required|unique:zones'
       ]);
 
       $user = Auth::user();

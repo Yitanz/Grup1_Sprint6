@@ -67,10 +67,9 @@ class HomeController extends Controller
           ->orderBy('id', 'DESC')
           ->paginate(2);
 
-          $chat = Chat::all();
 
 
-          return view('index', compact('noticies','promocions','chat'));
+          return view('index', compact('noticies','promocions'));
 
 
     }
@@ -111,7 +110,9 @@ class HomeController extends Controller
 
     public function contacte()
     {
-      return view("contacte");
+      $chat = Chat::all();
+
+      return view("contacte", compact('chat'));
     }
 
     public function gestio()

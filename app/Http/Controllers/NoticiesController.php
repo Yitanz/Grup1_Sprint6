@@ -42,6 +42,7 @@ class NoticiesController extends Controller
      */
     public function create()
     {
+      
         $categories = categories::all();
         return view('gestio.noticies.create', compact('categories'));
     }
@@ -54,11 +55,12 @@ class NoticiesController extends Controller
      */
     public function store(Request $request){
       if ($request->has('image')) {
+
         request()->validate([
-
               'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
+              'titol' => 'required|unique:noticies,titol',
           ]);
+
         $file = $request->file('image');
         $file_name = time() . $file->getClientOriginalName();
         $file_path = 'storage/noticies';

@@ -44,8 +44,6 @@ class ContacteController extends Controller
       //$user = User::find($usuari->id);
 
       $contacte = new Contacte ([
-
-
           'nom' => $request->nom,
           'email' => $request->email,
           'tipus_pregunta' => $request->tipus_pregunta,

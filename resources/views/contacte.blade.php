@@ -115,7 +115,7 @@ img.tick {
                     <textarea class="form-control"  name="consulta" id="consulta" rows="3"></textarea>
                   </div>
                   <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="check1">
+                    <input type="checkbox" class="form-check-input" name="checkE" id="check1">
                     <label class="form-check-label" for="owo">Acceptar les condicions</label>
                   </div>
                   <button id="submit" type="submit" class="btn btn-primary submit-contacte">Submit</button>
@@ -153,6 +153,7 @@ $(document).ready(function(){
       },
       success: function(result) {
           $("#submit").html("Enviat Correctament");
+          $("#sol").html("Gracias");
          $("#submit").attr("disabled", true);
 
          $("#submit").removeClass("btn btn-primary");
