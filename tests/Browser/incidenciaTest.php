@@ -13,7 +13,7 @@ class incidenciaTest extends DuskTestCase
 
     
     /**
-     * A Dusk test example.
+     * Test dusk proba incidencia sense fallos
      * @test
      * @return void
      */
@@ -40,11 +40,13 @@ class incidenciaTest extends DuskTestCase
 
         });
     }
+    
     /**
-     * A Dusk test example.
+     * Test dusk proba incidencia amb fallos
      * @test
      * @return void
     */
+
     public function test_usuari_envia_incidencia_falla()
     {
         $this->browse(function (Browser $browser) {

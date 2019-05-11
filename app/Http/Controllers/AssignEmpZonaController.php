@@ -13,10 +13,16 @@ use \App\ServeisZones;
 class AssignEmpZonaController extends Controller
 {
   /**
-   * Display a listing of the resource.
+   * Classe per assignar empleat a zona
    *
    * @return \Illuminate\Http\Response
    */
+
+  /**
+  * Selecciona totes les zona i les retorna a la vista indez
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function index()
   {
@@ -26,12 +32,25 @@ class AssignEmpZonaController extends Controller
 
   }
 
+  /**
+  * Busca una Zona en concret i retorna la zona a la vista
+  *
+  * 
+  * @param zona
+  */
+
   public function viewData(Request $request, $id){
 
     $zona = Zona::find($id);
     return view('gestio/AssignEmpZona/date', compact('zona'));
 
   }
+  
+  /**
+  * Busca els empleats lliures i els retorna a la vista
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function filterEmploye(Request $request, $id){
 
@@ -43,6 +62,12 @@ class AssignEmpZonaController extends Controller
 
     return view('gestio/AssignEmpZona/freeEmploye', compact('user','data_inici', 'data_fi', 'id_zona'));
   }
+
+  /**
+  * Guarda els empleats assignats
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function saveAssign (Request $request, $id){
 
@@ -67,12 +92,24 @@ class AssignEmpZonaController extends Controller
 
   }
 
+  /**
+  * Llista els empleats assignats
+  *
+  * @return \Illuminate\Http\Response
+  */
+
   public function listAssign (){
 
     $assign = AssignEmpZona::llistarEmpassign();
     return view ('gestio/AssignEmpZona/llistarAssign', compact('assign'));
 
   }
+
+  /**
+  * Borra les assignacions
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function deleteAssign ($id){
 
@@ -86,12 +123,24 @@ class AssignEmpZonaController extends Controller
     return view ('gestio/AssignEmpZona/llistarAssign', compact('assign'));
   }
 
+  /**
+  * Busca les sones i retorna la vista date
+  *
+  * @return \Illuminate\Http\Response
+  */
+
   public function viewDataNeteja(Request $request, $id){
 
     $zona = Zona::find($id);
     return view('gestio/AssignEmpZona/dateNeteja', compact('zona'));
 
   }
+
+  /**
+  * Filtra els empleats per rol
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function filterEmployeNeteja(Request $request, $id){
 
@@ -104,7 +153,13 @@ class AssignEmpZonaController extends Controller
     return view('gestio/AssignEmpZona/freeEmployeNeteja', compact('user','data_inici', 'data_fi', 'id_zona'));
   }
 
-    public function saveAssignNeteja (Request $request, $id){
+  /**
+  * Guarda l'assignacio
+  *
+  * @return \Illuminate\Http\Response
+  */
+
+  public function saveAssignNeteja (Request $request, $id){
 
       $request->validate([
           'id_zona' => 'required',
@@ -126,12 +181,24 @@ class AssignEmpZonaController extends Controller
 
   }
 
+  /**
+  * Busca les zones amb el mateix id
+  *
+  * @return \Illuminate\Http\Response
+  */
+
   public function viewDataAtencio(Request $request, $id){
 
     $zona = Zona::find($id);
     return view('gestio/AssignEmpZona/dateAtencio', compact('zona'));
 
   }
+
+  /**
+  * Filtra els empleats per rol i retorna una llista de empleats amb el rol seleccionat
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function filterEmployeAtencio(Request $request, $id){
 
@@ -144,6 +211,11 @@ class AssignEmpZonaController extends Controller
     return view('gestio/AssignEmpZona/freeEmployeAtencio', compact('user','data_inici', 'data_fi', 'id_zona'));
   }
 
+  /**
+  * Guarda l'assignacio del empleat
+  *
+  * @return \Illuminate\Http\Response
+  */
   public function saveAssignAtencio (Request $request, $id){
 
     $request->validate([
@@ -165,12 +237,25 @@ class AssignEmpZonaController extends Controller
         return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
 
   }
+
+  /**
+  * Retorna la vista per a les dates
+  *
+  * @return \Illuminate\Http\Response
+  */
+
   public function viewDataShow(Request $request, $id){
 
     $zona = Zona::find($id);
     return view('gestio/AssignEmpZona/dateShow', compact('zona'));
 
   }
+
+  /**
+  * Filtra els empleats per rol
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function filterEmployeShow(Request $request, $id){
 
@@ -182,6 +267,12 @@ class AssignEmpZonaController extends Controller
 
     return view('gestio/AssignEmpZona/freeEmployeShow', compact('user','data_inici', 'data_fi', 'id_zona'));
   }
+
+  /**
+  * Guarda les assignacions
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function saveAssignShow (Request $request, $id){
 
@@ -204,12 +295,25 @@ class AssignEmpZonaController extends Controller
         return redirect('gestio/AssignEmpZona')->with('success', 'Assignacio creada correctament');
 
   }
-public function viewDataSeguretat(Request $request, $id){
+
+  /**
+  * Retorna la vista de les dates 
+  *
+  * @return \Illuminate\Http\Response
+  */
+
+  public function viewDataSeguretat(Request $request, $id){
 
     $zona = Zona::find($id);
     return view('gestio/AssignEmpZona/dateSeg', compact('zona'));
 
   }
+
+  /**
+  * Filtra els empleats de seguretat
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function filterEmployeSeguretat(Request $request, $id){
 
@@ -221,6 +325,12 @@ public function viewDataSeguretat(Request $request, $id){
 
     return view('gestio/AssignEmpZona/freeEmployeSeg', compact('user','data_inici', 'data_fi', 'id_zona'));
   }
+
+  /**
+  * Guarda les assignacions
+  *
+  * @return \Illuminate\Http\Response
+  */
 
   public function saveAssignSeguretat (Request $request, $id){
 

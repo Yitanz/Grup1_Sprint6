@@ -20,7 +20,7 @@ use \App\Promocions;
 class PromocionsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Consulta a la base de dades les promocions
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class PromocionsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Retorna la vista create
      *
      * @return \Illuminate\Http\Response
      */
@@ -45,7 +45,7 @@ class PromocionsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.-
+     * Guarda les noves promocions inserides per l'usuari a la base de dades
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -78,7 +78,7 @@ class PromocionsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Rep un id i busca  a la taula promocions la promocio seleccionada i la retorna a la vista
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -91,7 +91,7 @@ class PromocionsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Rep un id la busca a la base de dades i retorna la consulta a la vista
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -104,7 +104,7 @@ class PromocionsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Rep un id el selecciona a la taula promocions de la base de dades i el modifica amb el request
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -139,7 +139,7 @@ class PromocionsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina la promocio seleccionada
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
